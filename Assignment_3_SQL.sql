@@ -34,19 +34,26 @@ GROUP BY c.City
 
 --Q5
 --a.Use union
-SELECT City, COUNT(*) as NumOfCustomer
+SELECT City
 FROM (
-    SELECT City FROM Customers
-    UNION ALL
-    SELECT City FROM Customers
-) AS c
-GROUP BY City
-HAVING COUNT(*) >= 2
+    SELECT City
+    FROM Customers
+    GROUP BY City
+    HAVING COUNT(CustomerID) >= 2
+    UNION
+    SELECT City
+    FROM Customers
+    GROUP BY City
+    HAVING COUNT(CustomerID) >= 2
+) AS Cities
 --b.Use sub-query and no union
 SELECT City
-FROM Customers
-GROUP BY City
-HAVING COUNT(CustomerID) >= 2
+FROM (
+    SELECT City, COUNT(*) AS NumOfCustomer
+    FROM Customers
+    GROUP BY City
+) AS CityCounts
+WHERE NumOfCustomer >= 2
 
 --Q6
 SELECT c.City
@@ -148,30 +155,14 @@ SELECT
     (SELECT OrderCity FROM MaxProductQuantities) AS CityWithMostProductsOrdered
 
 --Q11
---1.
-WITH cte AS (
+--ID: primary key for the table
+WITH CTE AS (
     SELECT *,
-           ROW_NUMBER() OVER (
-               PARTITION BY column1, column2, column3 
-               ORDER BY (SELECT NULL)
-           ) AS NumOfRow
-    FROM your_table
+    ROW_NUMBER() OVER (
+        PARTITION BY ColumnHasDuplicates
+        ORDER BY ID
+    ) AS RowNum
+    FROM TableToRemoveDuplicates
 )
-DELETE FROM cte WHERE NumOfRow > 1;
-
---2.
--- Create a temporary table with distinct records
-SELECT DISTINCT *
-INTO TempTable
-FROM OriginalTable;
-
--- Delete duplicate records from the original table
-TRUNCATE TABLE OriginalTable
-
--- Insert distinct records back into the original table
-INSERT INTO OriginalTable
-SELECT * FROM TempTable
-
--- Drop the temporary table
-DROP TABLE TempTable
+DELETE FROM CTE WHERE RowNum > 1;
 
