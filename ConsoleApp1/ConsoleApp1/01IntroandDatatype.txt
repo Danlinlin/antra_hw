@@ -1,0 +1,86 @@
+1.What type would you choose for the following “numbers”? 
+A person’s telephone number 
+string
+A person’s height
+float or double
+A person’s age
+int
+A person’s gender (Male, Female, Prefer Not To Answer)
+enum
+A person’s salary
+decimal
+A book’s ISBN
+string
+A book’s price
+decimal
+A book’s shipping 
+float or double
+A country’s population
+long
+The number of stars in the universe
+ulong
+The number of employees in each of the small or medium businesses in the
+United Kingdom (up to about 50,000 employees per business)
+Int
+
+2. What are the difference between value type and reference type variables? What is
+boxing and unboxing?
+Difference:
+1.Value type will directly hold the value, while reference type will hold the memory address for this value.
+2.Value types are stored in the stack memory and reference types are stored int the heap memory. 
+3.Value type will not be collected by garbage collector but reference type will be collected by garabage collector. 
+4. Value type can be created by struct or enum while reference type can be created by class, interface, delegate or array. 
+5. Value type can not accept any null values while reference type can accept null values. 
+Boxing is the process of converting a primitive datatype into an object wrapper datatype
+unboxing is the process of converting a value from an object wrapper type back to the native primitive value.
+
+3. What is meant by the terms managed resource and unmanaged resource in .NET
+managed resource, organized by garbage collector, we can't manually fit it by ourselves.
+unmanaged resource, manually fit the resource, call Dispose() from IDisposable interface
+
+4. Whats the purpose of Garbage Collector in .NET?
+CLR contains garbage collector to work as the automatically memory manager, help us to dynamically allocate the address and realse the memory.
+it only works under the heap memory.
+
+Controlling Flow and Converting Types
+1. What happens when you divide an int variable by 0?
+return a runtime exception, specifically a DivideByZeroException
+
+2. What happens when you divide a double variable by 0?
+return a special floating-point value: positive infinity (Infinity), negative infinity (-Infinity), or NaN (Not a Number).
+
+3. What happens when you overflow an int variable, that is, set it to a value beyond its
+range?
+In unchecked context (the default), the overflow is ignored, and the value wraps around to the minimum value of the data type.
+In checked context, an overflow causes a System.OverflowException to be thrown, preventing silent wrapping.
+
+4. What is the difference between x = y++; and x = ++y;?
+x = y++; is using the post-increment operator. This means y is assigned to x, and then y is incremented by 1.
+x = ++y; is using the pre-increment operator. This means y is incremented by 1 first, and then the new value of y is assigned to x.
+
+5. What is the difference between break, continue, and return when used inside a loop
+statement?
+break exits the nearest enclosing loop immediately, skipping any remaining iterations.
+continue skips the rest of the current iteration and proceeds with the next iteration of the loop.
+return exits the entire method in which the loop is running, optionally returning a value if the method is not void.
+
+6. What are the three parts of a for statement and which of them are required?
+Initialization: Runs before the loop starts. It's typically used to initialize the loop variable. This part is optional.
+Condition: Evaluated before each iteration. If true, the loop continues; if false, the loop ends. This part is optional, but omitting it can result in an infinite loop if there's no other break condition.
+Iterator: Executes at the end of each loop iteration, usually to increment/decrement the loop variable. This part is optional.
+
+7. What is the difference between the = and == operators?
+= is the assignment operator. It assigns the value on its right to the variable on its left.
+== is the equality operator. It checks if the values of two operands are equal, returning a boolean result (true or false).
+
+8. Does the following statement compile? for ( ; true; ) ;
+Yes, this statement does compile. It represents an infinite loop that will continue to execute indefinitely, as the condition true never changes. The loop does nothing in each iteration due to the empty statement (;).
+
+9. What does the underscore _ represent in a switch expression?
+_ is used as a "discard" symbol in switch expressions (and pattern matching more broadly) to represent the default case, which matches any value not matched by the preceding cases. It's like the default keyword in traditional switch statements.
+
+10. What interface must an object implement to be enumerated over by using the foreach
+statement?
+an object must implement the IEnumerable interface or the generic version IEnumerable<T>. This interface requires the implementation of the GetEnumerator method, which returns an enumerator that can iterate through the collection.
+
+
